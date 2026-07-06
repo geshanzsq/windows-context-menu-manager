@@ -133,6 +133,9 @@ windows-context-menu-manager/
 - 某些扩展处理程序无法解析到明确的 EXE 或 DLL，因此不会显示“打开位置”。
 - 恢复机器级备份或修改“所有用户”项目时，需要管理员权限。
 
+## 功能图片
+![右键菜单管理器.png](https://geshanzsq.com/geshanzsq-file/profile/image/2026/07/06/92314617-ba4e-4022-89ac-9a33fdb10b28.png)
+
 ## 许可证
 
 本项目基于 [MIT License](LICENSE) 开源，版权所有 © 2026 geshanzsq。
