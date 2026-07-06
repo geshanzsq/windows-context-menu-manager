@@ -1,0 +1,76 @@
+{
+  "name": "windows-context-menu-manager",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Context Menu Manager Contributors",
+  "description": "查看并安全移除 Windows 右键菜单集成",
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on tcp:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
+    "build": "vue-tsc --noEmit && vite build && tsc -p tsconfig.electron.json && electron-builder --config.win.signAndEditExecutable=false && node scripts/set-exe-language.cjs",
+    "build:dir": "vue-tsc --noEmit && vite build && tsc -p tsconfig.electron.json && electron-builder --dir --config.win.signAndEditExecutable=false",
+    "typecheck": "vue-tsc --noEmit && tsc -p tsconfig.electron.json --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "20.19.1",
+    "@vitejs/plugin-vue": "5.2.4",
+    "concurrently": "8.2.2",
+    "cross-env": "7.0.3",
+    "electron": "30.5.1",
+    "electron-builder": "24.13.3",
+    "resedit": "^2.0.3",
+    "typescript": "5.8.3",
+    "vite": "5.4.19",
+    "vue": "3.5.17",
+    "vue-tsc": "2.2.10",
+    "wait-on": "7.2.0"
+  },
+  "build": {
+    "appId": "com.contextmenu.manager",
+    "productName": "右键菜单管理器",
+    "asar": true,
+    "afterPack": "scripts/after-pack.cjs",
+    "compression": "maximum",
+    "electronLanguages": [
+      "zh-CN",
+      "en-US"
+    ],
+    "npmRebuild": false,
+    "removePackageScripts": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "differentialPackage": false,
+      "shortcutName": "右键菜单管理器"
+    }
+  }
+}
